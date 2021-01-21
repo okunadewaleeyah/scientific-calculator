@@ -12,14 +12,6 @@ class calculator {
         this.operation = ''
     }
 
-    syntaxError() {
-            if (eval(this.currentOperand) == SyntaxError ||
-            eval(this.currentOperand) == ReferenceError ||
-            eval(this.currentOperand) == TypeError) {
-                this.currentOperand == "Syntax Error"
-            }
-    }
-
     delete() {
         this.currentOperand = this.currentOperand.toString().slice(0, -1)
     }
@@ -27,54 +19,6 @@ class calculator {
     appendNumber(number) {
         if (number === '.' && this.currentOperand.includes('.')) return
         this.currentOperand = this.currentOperand.toString() + number.toString()
-    }
-
-    degToRad(degrees) {
-        return degrees * (Math.PI / 180)
-    }
-
-    radToDeg(rad) {
-        return rad / Math.PI / 180
-    }
-    
-    tan() {
-        this.currentOperand = Math.tan(this.currentOperand)
-    }
-
-    cos() {
-        this.currentOperand = Math.cos(this.currentOperand)
-    }
-
-    sin() {
-        this.currentOperand = Math.sin(this.currentOperand)
-    }
-
-    tanh() {
-        this.currentOperand = Math.tanh(this.currentOperand)
-    }
-
-    cosh() {
-        this.currentOperand = Math.cosh(this.currentOperand)
-    }
-
-    sinh() {
-        this.currentOperand = Math.sinh(this.currentOperand)
-    }
-
-    log() {
-        this.currentOperand = Math.log(this.currentOperand)
-    }
-
-    log10() {
-        this.currentOperand = Math.log10(this.currentOperand)
-    }
-
-    pi() {
-        this.currentOperand = Math.PI()
-    }
-
-    random () {
-        this.currentOperand = Math.random()
     }
 
     chooseOperation(operation) {
@@ -104,6 +48,22 @@ class calculator {
                 break
             case '÷':
                 computation = prev / current
+                break
+            case 'tan':
+                if(prev === 0) {
+                    computation = Math.tan(current)
+                } else {
+                computation = prev * Math.tan(current)}
+                console.log(computation)
+                break
+            case 'cos':
+                computation = prev * Math.cos(current)
+                break
+            case 'sin':
+                computation = prev * Math.sin(current)
+                break
+            case 'tanh':
+                computation = prev * Math.tanh(current)
                 break
             default:
                 return
@@ -148,21 +108,11 @@ class calculator {
 
 const numberButtons = document.querySelectorAll('[data-number]')
 const operationButtons = document.querySelectorAll('[data-operation]')
-const equalsButton = document.querySelector('[data-equals]')
-const deleteButton = document.querySelector('[data-delete]')
-const tanButton = document.querySelector('[data-tan]')
-const cosButton = document.querySelector('[data-cos]')
-const sinButton = document.querySelector('[data-sin]')
-const tanhButton = document.querySelector('[data-tanh]')
-const coshButton = document.querySelector('[data-cosh]')
-const sinhButton = document.querySelector('[data-sinh]')
-const logButton = document.querySelector('[data-log]')
-const log10Button = document.querySelector('[data-log10]')
-const piButton = document.querySelector('[data-pi]')
-const randomButton = document.querySelector('[data-random]')
-const allClearButton = document.querySelector('[data-all-clear]')
-const previousOperandTextElement = document.querySelector('[data-previous-operand]')
-const currentOperandTextElement = document.querySelector('[data-current-operand]')
+const equalsButton = document.querySelector('[data-equals')
+const deleteButton = document.querySelector('[data-delete')
+const allClearButton = document.querySelector('[data-all-clear')
+const previousOperandTextElement = document.querySelector('[data-previous-operand')
+const currentOperandTextElement = document.querySelector('[data-current-operand')
 
 
 const calc = new calculator (previousOperandTextElement, currentOperandTextElement)
@@ -181,13 +131,6 @@ operationButtons.forEach(button => {
     })
 })
 
-
-operationButtons.forEach(button => {
-    button.addEventListener('click', () => {
-        calc.chooseOperation(button.innerText)
-        calc.updateDisplay()
-    })
-})
 equalsButton.addEventListener('click', button => {
     calc.compute()
     calc.updateDisplay()
@@ -200,55 +143,5 @@ allClearButton.addEventListener('click', button => {
 
 deleteButton.addEventListener('click', button => {
     calc.delete()
-    calc.updateDisplay()
-})
-
-tanButton.addEventListener('click', button => {
-    calc.tan()
-    calc.updateDisplay()
-})
-
-cosButton.addEventListener('click', button => {
-    calc.cos()
-    calc.updateDisplay()
-})
-
-sinButton.addEventListener('click', button => {
-    calc.sin()
-    calc.updateDisplay()
-})
-
-tanhButton.addEventListener('click', button => {
-    calc.tanh()
-    calc.updateDisplay()
-})
-
-coshButton.addEventListener('click', button => {
-    calc.cosh()
-    calc.updateDisplay()
-})
-
-sinhButton.addEventListener('click', button => {
-    calc.sinh()
-    calc.updateDisplay()
-})
-
-logButton.addEventListener('click', button => {
-    calc.log()
-    calc.updateDisplay()
-})
-
-log10Button.addEventListener('click', button => {
-    calc.log10()
-    calc.updateDisplay()
-})
-
-piButton.addEventListener('click', button => {
-    calc.pi()
-    calc.updateDisplay()
-})
-
-randButton.addEventListener('click', button => {
-    calc.random()
     calc.updateDisplay()
 })
